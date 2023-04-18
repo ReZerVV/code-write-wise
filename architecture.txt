@@ -1,0 +1,38 @@
+CORE {
+cursor:
+    __args__
+    vec2 position
+    vec2 selection
+    __funcs__
+
+writer:
+    __args__
+    char** data
+    __funcs__
+    remove(pos, count) # удаляет сивмолы в позиции курсора.
+    insert(pos, syms, syms_count) # записывает символ в позиции курсора.
+    find(syms, syms_count) # находит строку в 'data'.
+
+file_manager:
+    __args__
+    __funcs__
+    read(file_path) # считывает данные из файла.
+    write(file_path, data) # записывает данные в файл.
+
+document:
+    __args__    
+    cursor
+    writer
+    file_manager
+    __funcs__
+    init() # создает пустой документ.
+    save(file_path) # сохраняет документ.
+    load(file_path) # загружает документ из файла.
+    # cursor
+    move(pos) # перемещает курсор в задану позицию.
+
+}
+
+UI {
+
+}
