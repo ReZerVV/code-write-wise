@@ -10,6 +10,7 @@ pkg_check_modules(SDL2_ttf REQUIRED SDL2_ttf)
 add_executable(${PROJECT_NAME}
   src/main.cpp
   src/writer.cpp
+  src/document.cpp
 )
 
 include_directories(${PROJECT_NAME}

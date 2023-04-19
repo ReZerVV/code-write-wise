@@ -12,14 +12,19 @@ public:
 // Movable constructor.
     writer(writer&&) = default;
 public:
-    void remove(const size_t pix, const size_t count);
-    void insert(const size_t pix, const char* syms);
-    void input(const char* syms);
+    bool remove(const size_t pix, const size_t length);
+    bool insert(const size_t pix, const char* syms);
+    bool input(const char* syms);
     // void find();
+    bool empty() const;
+    size_t size() const;
+    size_t capacity() const;
+    char* c_str();
+    char& operator[](const size_t pix);
 private:
     void memory_relocate();
     void memory_delete();
-public:
+private:
     size_t _capacity;
     size_t _size;
     char* _buffer;
