@@ -14,11 +14,18 @@ public:
 public:
     void remove();
     void input(const char* syms);
+    
+    void new_line();
 
-    void cursor_move_up(const size_t step);
-    void cursor_move_left(const size_t step);
-    void cursor_move_right(const size_t step);
-    void cursor_move_down(const size_t step);
+    bool cursor_move_up(const size_t step);
+    bool cursor_move_left(const size_t step);
+    bool cursor_move_right(const size_t step);
+    bool cursor_move_down(const size_t step);
+
+    bool load(const char* file_path);
+    bool save(const char* file_path);
+    
+    void clear();
 private:
     void memory_relocate();
     void memory_delete();

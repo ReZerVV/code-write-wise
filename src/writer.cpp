@@ -44,19 +44,18 @@ char* writer::c_str() {
     return _buffer;
 }
 
-
-char& writer::operator[](const size_t pix) {
+char& writer::at(const size_t pix) {
     if (0 > pix || pix > _size) {
         throw "index out of range";
     }
     return _buffer[pix];
 }
 
-bool writer::insert(const size_t pix, const char* syms) {
-    if (0 > pix || pix > _size) {
-        return false;
-    }
+char& writer::operator[](const size_t pix) {
+    return at(pix);
+}
 
+bool writer::insert(const size_t pix, const char* syms) {
     if (_size + strlen(syms) < _capacity) {
         std::memmove(&_buffer[pix + strlen(syms)], &_buffer[pix], _size - pix);
         std::memcpy(&_buffer[pix], syms, strlen(syms));
@@ -82,11 +81,7 @@ bool writer::input(const char* syms) {
 }
 
 bool writer::remove(const size_t pix, const size_t length) {
-    if (0 > pix || pix > _size) {
-        return false;
-    }
-
-    if (0 <= pix - length && pix - length < _size) {
+    if (!empty()) {
         if (pix < _size - 1) {
             std::memcpy(&_buffer[pix], &_buffer[pix + length], _size - pix);
         }

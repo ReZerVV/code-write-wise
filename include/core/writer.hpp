@@ -20,6 +20,7 @@ public:
     size_t size() const;
     size_t capacity() const;
     char* c_str();
+    char& at(const size_t pix);
     char& operator[](const size_t pix);
 private:
     void memory_relocate();
