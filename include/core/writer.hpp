@@ -14,6 +14,7 @@ public:
 public:
     bool remove(const size_t pix, const size_t length);
     bool insert(const size_t pix, const char* syms);
+    bool insert(const size_t pix, const char* syms, const size_t length);
     bool input(const char* syms);
     // void find();
     bool empty() const;

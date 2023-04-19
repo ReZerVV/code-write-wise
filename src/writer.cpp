@@ -68,6 +68,19 @@ bool writer::insert(const size_t pix, const char* syms) {
     return false;
 }
 
+bool writer::insert(const size_t pix, const char* syms, const size_t length) {
+    if (_size + length < _capacity) {
+        std::memmove(&_buffer[pix + length], &_buffer[pix], _size - pix);
+        std::memcpy(&_buffer[pix], syms, length);
+        _size += length;
+        return true;
+    } else {
+        memory_relocate();
+        return insert(pix, syms);
+    }
+    return false;
+}
+
 bool writer::input(const char* syms) {
     if (_size + strlen(syms) < _capacity) {
         std::memcpy(&_buffer[_size], syms, strlen(syms));

@@ -59,6 +59,16 @@ void document::input(const char* syms) {
 void document::new_line() {
     if (_size < _capacity) {
         _data[_size] = new writer{ };
+        if (! _data[_cursor.y]->empty() && _cursor.x < _data[_cursor.y]->size() - 1) {
+            /*
+            for (size_t index = _cursor.x; index < _data[_cursor.y]->size(); ++index) {
+                _data[_size]->insert(_data[_cursor.y]->at(index), 1);
+            }
+            */
+            _data[_size]->insert(0, &_data[_cursor.y]->c_str()[_cursor.x], _data[_cursor.y]->size() - _cursor.x);
+
+            _data[_cursor.y]->remove(_data[_cursor.y]->size() - 1, _data[_cursor.y]->size() - _cursor.x);
+        }
         if (_cursor.y < _size - 1) {
             for (size_t line = _size; line > _cursor.y; --line) {
                 std::swap(_data[line], _data[line-1]);
